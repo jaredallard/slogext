@@ -15,7 +15,7 @@ See `captuered.go`
 
 ## Documentation
 
-See our [go docs (pkg.go.dev)](https://pkg.go.dev/jaredallard/slogext)
+See our [go docs (pkg.go.dev)](https://pkg.go.dev/github.com/jaredallard/slogext)
 
 ## License
 
