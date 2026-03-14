@@ -11,7 +11,7 @@ automatically logs with test specific information.
 
 ### Capturing Output for Testing
 
-See `captuered.go`
+See `captured.go`
 
 ## Documentation
 
