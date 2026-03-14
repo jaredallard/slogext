@@ -27,7 +27,7 @@ import (
 	"log/slog"
 	"os"
 
-	charmlog "github.com/charmbracelet/log"
+	charmlog "charm.land/log/v2"
 )
 
 // _ ensures that the logger struct satisfies the Logger interface.

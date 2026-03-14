@@ -3,7 +3,7 @@ package slogext_test
 import (
 	"testing"
 
-	"github.com/jaredallard/slogext"
+	"go.rgst.io/jaredallard/slogext/v2"
 	"gotest.tools/v3/assert"
 )
 
