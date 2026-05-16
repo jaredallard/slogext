@@ -18,7 +18,7 @@ linters:
         - style
     goheader:
       template: |-
-        Copyright (C) {{ YEAR }} slogext contributors
+        Copyright (C) {{ MOD_YEAR }} slogext contributors
 
         This program is free software: you can redistribute it and/or modify
         it under the terms of the GNU Lesser General Public License as
@@ -83,6 +83,11 @@ linters:
           - gocyclo
           - goheader # Don't require license headers in test files.
           - gosec
+      # Checking return of Close() is optional.
+      - path: '(.+)\.go$'
+        text: 'Error return value of `(.*\.Close|fmt\.F.*)` is not checked'
+      - path: '(.+)\.go$'
+        text: "G104: Errors unhandled" # Duplicates errcheck.
 
 # formatter settings
 formatters:

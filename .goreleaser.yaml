@@ -6,6 +6,9 @@ metadata:
   mod_timestamp: "{{ .CommitTimestamp }}"
 builds:
   - skip: true
+archives:
+  - formats:
+      - none
 checksum:
   name_template: "checksums.txt"
 snapshot:
@@ -16,11 +19,9 @@ release:
   gitea:
     owner: jaredallard
     name: slogext
-
   prerelease: "auto"
   footer: |-
     **Full Changelog**: https://git.rgst.io/jaredallard/slogext/compare/{{ .PreviousTag }}...{{ .Tag }}
-
 gitea_urls:
   api: https://git.rgst.io/api/v1
   download: https://git.rgst.io
