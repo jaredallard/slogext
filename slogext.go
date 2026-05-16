@@ -26,8 +26,10 @@ import (
 	"io"
 	"log/slog"
 	"os"
+	"time"
 
 	charmlog "charm.land/log/v2"
+	"github.com/charmbracelet/x/term"
 )
 
 // _ ensures that the logger struct satisfies the Logger interface.
@@ -76,9 +78,19 @@ func New() Logger {
 }
 
 // NewWithWriter creates a new [Logger] using the slog package with a
-// custom writer target.
+// custom writer target. If the writer does not appear to be a terminal,
+// then JSON is used.
 func NewWithWriter(w io.Writer) Logger {
-	handler := charmlog.New(w)
+	opts := charmlog.Options{Formatter: charmlog.JSONFormatter}
+	if f, ok := w.(*os.File); ok && term.IsTerminal(f.Fd()) {
+		opts.Formatter = charmlog.TextFormatter
+	} else {
+		// JSON options
+		opts.ReportTimestamp = true
+		opts.TimeFormat = time.RFC3339
+	}
+
+	handler := charmlog.NewWithOptions(w, opts)
 	return &logger{slog.New(handler), handler}
 }
 
