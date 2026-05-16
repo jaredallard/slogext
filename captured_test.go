@@ -39,6 +39,8 @@ func TestDisplaysFormattedLogsTTY(t *testing.T) {
 
 	log := slogext.NewWithWriter(tty)
 	log.Info("hello world")
+
+	time.Sleep(200 * time.Millisecond)
 	tty.Close()
 
 	assert.Equal(t, strings.TrimSpace(ansi.Strip(buf.String())), "INFO hello world")
