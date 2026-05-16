@@ -2,10 +2,12 @@ package slogext_test
 
 import (
 	"bytes"
+	"fmt"
 	"io"
 	"strings"
 	"testing"
 	"testing/synctest"
+	"time"
 
 	"github.com/charmbracelet/x/ansi"
 	"github.com/creack/pty"
@@ -18,7 +20,12 @@ func TestCanCaptureWithCapturedLogger(t *testing.T) {
 		log, buf := slogext.NewCapturedLogger()
 		log.Info("hello world")
 
-		assert.Equal(t, strings.TrimSpace(buf.String()), `{"time":"1999-12-31T16:00:00-08:00","level":"info","msg":"hello world"}`)
+		assert.Equal(t, strings.TrimSpace(buf.String()),
+			fmt.Sprintf(
+				`{"time":%q,"level":"info","msg":"hello world"}`,
+				time.Now().Format(time.RFC3339),
+			),
+		)
 	})
 }
 
