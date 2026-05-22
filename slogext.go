@@ -30,6 +30,7 @@ import (
 
 	charmlog "charm.land/log/v2"
 	"github.com/charmbracelet/x/term"
+	"github.com/muesli/termenv"
 )
 
 // _ ensures that the logger struct satisfies the Logger interface.
@@ -81,8 +82,20 @@ func New() Logger {
 // custom writer target. If the writer does not appear to be a terminal,
 // then JSON is used.
 func NewWithWriter(w io.Writer) Logger {
-	opts := charmlog.Options{Formatter: charmlog.JSONFormatter}
+	var prettyPrint bool
 	if f, ok := w.(*os.File); ok && term.IsTerminal(f.Fd()) {
+		prettyPrint = true
+	}
+
+	// Essentially; if CLICOLOR_FORCE is set this'll returning something
+	// other than ASCII, but also allows us to forcibly disable. This
+	// matches how charm does the logic on their side as well.
+	if profile := termenv.EnvColorProfile(); profile != termenv.Ascii {
+		prettyPrint = true
+	}
+
+	opts := charmlog.Options{Formatter: charmlog.JSONFormatter}
+	if prettyPrint {
 		opts.Formatter = charmlog.TextFormatter
 	} else {
 		// JSON options

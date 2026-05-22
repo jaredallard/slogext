@@ -45,3 +45,14 @@ func TestDisplaysFormattedLogsTTY(t *testing.T) {
 
 	assert.Equal(t, strings.TrimSpace(ansi.Strip(buf.String())), "INFO hello world")
 }
+
+func TestCanForceColoredLogs(t *testing.T) {
+	synctest.Test(t, func(t *testing.T) {
+		t.Setenv("CLICOLOR_FORCE", "1")
+
+		log, buf := slogext.NewCapturedLogger()
+		log.Info("hello world")
+
+		assert.Equal(t, buf.String(), "\x1b[1;38;5;86mINFO\x1b[m hello world\n")
+	})
+}
