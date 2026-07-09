@@ -19,4 +19,4 @@ See our [go docs (pkg.go.dev)](https://pkg.go.dev/go.rgst.io/jaredallard/slogext
 
 ## License
 
-LGPL-3.0
+MPL-2.0

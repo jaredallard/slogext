@@ -9,10 +9,13 @@ builds:
 archives:
   - formats:
       - none
+      ## <<Stencil::Block(extraDockerOpts)>>
+
+      ## <</Stencil::Block>>
 checksum:
   name_template: "checksums.txt"
 snapshot:
-  version_template: "{{ incpatch .Version }}-next"
+  version_template: "{{ .Commit }}"
 changelog:
   use: git
 release:
