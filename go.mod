@@ -4,7 +4,7 @@ go 1.26
 
 require (
 	charm.land/log/v2 v2.0.1
-	github.com/charmbracelet/x/ansi v0.11.9
+	github.com/charmbracelet/x/ansi v0.11.10
 	github.com/charmbracelet/x/term v0.2.2
 	github.com/creack/pty v1.1.24
 	github.com/muesli/termenv v0.16.0
